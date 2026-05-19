@@ -6,30 +6,13 @@ import { ProductCard } from "@/components/features/ProductCard";
 import { CategoryPills } from "@/components/features/CategoryPills";
 import { ArrowRight, Clock, Zap, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import { DEFAULT_CATEGORIES, DEFAULT_PRODUCTS } from "@/lib/constants/seeds";
 
 const SUPER_CATEGORIES = [
   { id: "food", name: "Food", slugs: ["snacks", "instant-food", "bakery", "breakfast", "frozen-foods", "beverages"] },
   { id: "grocery", name: "Grocery", slugs: ["fruits-veggies", "staples-grains", "cleaning", "personal-care", "pet-care", "baby-care", "condiments"] },
   { id: "dairy", name: "Dairy Products", slugs: ["dairy-eggs"] },
   { id: "meat", name: "Meat", slugs: ["meat-seafood"] }
-];
-
-const DEFAULT_CATEGORIES = [
-  { id: "cat-fruits-veggies", name: "Fruits & Veggies", slug: "fruits-veggies" },
-  { id: "cat-dairy-eggs", name: "Dairy & Eggs", slug: "dairy-eggs" },
-  { id: "cat-meat-seafood", name: "Meat & Seafood", slug: "meat-seafood" },
-  { id: "cat-snacks", name: "Snacks", slug: "snacks" },
-  { id: "cat-beverages", name: "Beverages", slug: "beverages" },
-  { id: "cat-bakery", name: "Bakery", slug: "bakery" },
-  { id: "cat-staples-grains", name: "Staples & Grains", slug: "staples-grains" },
-  { id: "cat-breakfast", name: "Breakfast", slug: "breakfast" },
-  { id: "cat-frozen-foods", name: "Frozen Foods", slug: "frozen-foods" },
-  { id: "cat-cleaning", name: "Cleaning", slug: "cleaning" },
-  { id: "cat-personal-care", name: "Personal Care", slug: "personal-care" },
-  { id: "cat-pet-care", name: "Pet Care", slug: "pet-care" },
-  { id: "cat-baby-care", name: "Baby Care", slug: "baby-care" },
-  { id: "cat-condiments", name: "Condiments & Sauces", slug: "condiments" },
-  { id: "cat-instant-food", name: "Instant Food", slug: "instant-food" }
 ];
 
 export default function HomePage() {
@@ -49,7 +32,7 @@ export default function HomePage() {
       ]);
       
       const catsData = cats && cats.length > 0 ? cats : DEFAULT_CATEGORIES;
-      const dbFeatured = featuredItems || [];
+      const dbFeatured = featuredItems && featuredItems.length > 0 ? featuredItems : DEFAULT_PRODUCTS.filter(p => p.is_featured);
       
       let localFeatured: any[] = [];
       if (typeof window !== "undefined") {
@@ -84,7 +67,15 @@ export default function HomePage() {
       }
       
       const { data } = await query.order("created_at", { ascending: false }).limit(40);
-      const dbProds = data || [];
+      let dbProds: any[] = data || [];
+      if (dbProds.length === 0) {
+        dbProds = DEFAULT_PRODUCTS.filter((dp) => {
+          if (selectedCategory !== "all" && matchedCatIds.length > 0) {
+            return matchedCatIds.includes(dp.category_id);
+          }
+          return true;
+        });
+      }
       
       let localProds: any[] = [];
       if (typeof window !== "undefined") {

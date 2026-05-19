@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { ProductCard } from "@/components/features/ProductCard";
 import { Input } from "@/components/ui/Input";
 import { Search, SlidersHorizontal } from "lucide-react";
+import { DEFAULT_PRODUCTS } from "@/lib/constants/seeds";
 
 function useDebounce(value: string, ms: number) {
   const [debounced, setDebounced] = useState(value);
@@ -36,7 +37,14 @@ export default function SearchPage() {
       }
 
       const { data } = await q.limit(50);
-      const dbResults = data || [];
+      let dbResults: any[] = data || [];
+
+      if (dbResults.length === 0) {
+        dbResults = DEFAULT_PRODUCTS.filter((dp) => {
+          if (!debouncedQuery) return true;
+          return dp.name.toLowerCase().includes(debouncedQuery.toLowerCase());
+        });
+      }
 
       // Local mock products
       let localProds: any[] = [];
