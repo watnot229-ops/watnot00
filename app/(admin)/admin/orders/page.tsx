@@ -172,46 +172,46 @@ export default function AdminOrdersPage() {
       {/* Order detail modal */}
       <Modal isOpen={!!selected} onClose={() => setSelected(null)} title={selected?.order_number}>
         {selected && (
-          <div className="space-y-4">
+          <div className="space-y-5 text-white">
             <div>
-              <p className="text-xs text-text-secondary mb-1">Status</p>
-              <select value={selected.status} onChange={(e) => updateStatus(selected.id, e.target.value)} className="border border-gray-200 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:border-primary">
-                {STATUSES.map((s) => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
+              <p className="text-xs text-neutral-400 mb-1.5 font-medium">Status</p>
+              <select value={selected.status} onChange={(e) => updateStatus(selected.id, e.target.value)} className="border border-neutral-800 bg-neutral-950 text-white rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:border-primary">
+                {STATUSES.map((s) => <option key={s} value={s} className="bg-neutral-900 text-white">{s.replace("_", " ")}</option>)}
               </select>
             </div>
-
+ 
             {!selected.delivery_agent_id && agents.length > 0 && (
               <div>
-                <p className="text-xs text-text-secondary mb-1">Assign Delivery Agent</p>
-                <select onChange={(e) => assignAgent(selected.id, e.target.value)} defaultValue="" className="border border-gray-200 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:border-primary">
-                  <option value="" disabled>Select agent…</option>
-                  {agents.map((a) => <option key={a.user_id} value={a.user_id}>{a.users?.full_name || a.user_id}</option>)}
+                <p className="text-xs text-neutral-400 mb-1.5 font-medium">Assign Delivery Agent</p>
+                <select onChange={(e) => assignAgent(selected.id, e.target.value)} defaultValue="" className="border border-neutral-800 bg-neutral-950 text-white rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:border-primary">
+                  <option value="" disabled className="bg-neutral-900 text-neutral-400">Select agent…</option>
+                  {agents.map((a) => <option key={a.user_id} value={a.user_id} className="bg-neutral-900 text-white">{a.users?.full_name || a.user_id}</option>)}
                 </select>
               </div>
             )}
-
+ 
             <div>
-              <p className="text-xs text-text-secondary mb-2">Items</p>
+              <p className="text-xs text-neutral-400 mb-2 font-medium">Items</p>
               {((selected.items as any[]) || []).map((item: any, i: number) => (
-                <div key={i} className="flex justify-between text-sm py-1 border-b border-gray-100">
-                  <span>{item.name} × {item.quantity}</span>
-                  <span>{formatCurrency(item.price * item.quantity)}</span>
+                <div key={i} className="flex justify-between text-sm py-2 border-b border-neutral-800">
+                  <span className="text-neutral-200">{item.name} × {item.quantity}</span>
+                  <span className="font-semibold">{formatCurrency(item.price * item.quantity)}</span>
                 </div>
               ))}
             </div>
-
-            <div className="text-sm space-y-1">
-              <div className="flex justify-between"><span className="text-text-secondary">Subtotal</span><span>{formatCurrency(selected.subtotal || 0)}</span></div>
-              <div className="flex justify-between"><span className="text-text-secondary">Delivery</span><span>{formatCurrency(selected.delivery_fee || 0)}</span></div>
-              <div className="flex justify-between font-bold text-base pt-1 border-t">
-                <span>Total</span><span>{formatCurrency(selected.total || 0)}</span>
+ 
+            <div className="text-sm space-y-1.5">
+              <div className="flex justify-between"><span className="text-neutral-400">Subtotal</span><span>{formatCurrency(selected.subtotal || 0)}</span></div>
+              <div className="flex justify-between"><span className="text-neutral-400">Delivery</span><span>{formatCurrency(selected.delivery_fee || 0)}</span></div>
+              <div className="flex justify-between font-bold text-base pt-2 border-t border-neutral-800">
+                <span>Total</span><span className="text-primary">{formatCurrency(selected.total || 0)}</span>
               </div>
             </div>
-
+ 
             {selected.delivery_address && (
-              <div>
-                <p className="text-xs text-text-secondary mb-1">Delivery To</p>
-                <p className="text-sm">{(selected.delivery_address as any).address_line}, {(selected.delivery_address as any).city}</p>
+              <div className="pt-2 border-t border-neutral-800">
+                <p className="text-xs text-neutral-400 mb-1 font-medium">Delivery To</p>
+                <p className="text-sm text-neutral-200 font-medium">{(selected.delivery_address as any).address_line}, {(selected.delivery_address as any).city}</p>
               </div>
             )}
           </div>

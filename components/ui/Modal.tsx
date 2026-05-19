@@ -27,22 +27,22 @@ export function Modal({ isOpen, onClose, title, children, className }: ModalProp
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm">
       <div 
         className="absolute inset-0" 
         onClick={onClose}
       />
       <div 
         className={cn(
-          "relative w-full max-h-[90vh] overflow-y-auto bg-white rounded-t-2xl sm:rounded-2xl shadow-xl animate-in slide-in-from-bottom-full sm:slide-in-from-bottom-10 sm:max-w-md p-6",
+          "relative w-full max-h-[90vh] overflow-y-auto bg-neutral-900 border border-neutral-800 rounded-t-2xl sm:rounded-2xl shadow-2xl animate-in slide-in-from-bottom-full sm:slide-in-from-bottom-10 sm:max-w-md p-6 text-white",
           className
         )}
       >
         <div className="flex items-center justify-between mb-4">
-          {title && <h2 className="text-xl font-heading font-semibold text-text-primary">{title}</h2>}
+          {title && <h2 className="text-xl font-heading font-semibold text-white">{title}</h2>}
           <button 
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-surface text-text-secondary transition-colors"
+            className="p-2 rounded-full hover:bg-neutral-800 text-neutral-400 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>

@@ -100,40 +100,40 @@ export default function AdminCouponsPage() {
 
       {/* Create coupon modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6">
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="font-heading text-xl font-bold">Create Coupon</h2>
-              <button onClick={() => setShowForm(false)} className="p-2 hover:bg-surface rounded-full"><X className="w-5 h-5" /></button>
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full max-w-md p-6 text-white shadow-2xl">
+            <div className="flex items-center justify-between mb-5 border-b border-neutral-800 pb-3">
+              <h2 className="font-heading text-xl font-bold text-white">Create Coupon</h2>
+              <button onClick={() => setShowForm(false)} className="p-2 hover:bg-neutral-800 text-neutral-400 hover:text-white rounded-full transition-colors"><X className="w-5 h-5" /></button>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-1 block">Coupon Code *</label>
-                <input value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value.toUpperCase() })} placeholder="SAVE50" className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary uppercase font-bold tracking-widest" />
+                <label className="text-sm font-medium mb-1.5 block text-neutral-300">Coupon Code *</label>
+                <input value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value.toUpperCase() })} placeholder="SAVE50" className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary uppercase font-bold tracking-widest placeholder-neutral-500" />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Type</label>
-                  <select value={form.discount_type} onChange={(e) => setForm({ ...form, discount_type: e.target.value as any })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary">
-                    <option value="flat">Flat (₹)</option>
-                    <option value="percent">Percent (%)</option>
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Type</label>
+                  <select value={form.discount_type} onChange={(e) => setForm({ ...form, discount_type: e.target.value as any })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary">
+                    <option value="flat" className="bg-neutral-900 text-white">Flat (₹)</option>
+                    <option value="percent" className="bg-neutral-900 text-white">Percent (%)</option>
                   </select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Value *</label>
-                  <input type="number" value={form.discount_value} onChange={(e) => setForm({ ...form, discount_value: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Value *</label>
+                  <input type="number" value={form.discount_value} onChange={(e) => setForm({ ...form, discount_value: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Min Order (₹)</label>
-                  <input type="number" value={form.min_order_value} onChange={(e) => setForm({ ...form, min_order_value: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Min Order (₹)</label>
+                  <input type="number" value={form.min_order_value} onChange={(e) => setForm({ ...form, min_order_value: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Max Uses</label>
-                  <input type="number" value={form.max_uses} onChange={(e) => setForm({ ...form, max_uses: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Max Uses</label>
+                  <input type="number" value={form.max_uses} onChange={(e) => setForm({ ...form, max_uses: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-medium mb-1 block">Expires At</label>
-                  <input type="datetime-local" value={form.expires_at} onChange={(e) => setForm({ ...form, expires_at: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Expires At</label>
+                  <input type="datetime-local" value={form.expires_at} onChange={(e) => setForm({ ...form, expires_at: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary text-neutral-300" />
                 </div>
               </div>
               <Button className="w-full" onClick={save} isLoading={saving}>Create Coupon</Button>

@@ -126,61 +126,61 @@ export default function AdminProductsPage() {
 
       {/* Product form modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="font-heading text-xl font-bold">{editing ? "Edit Product" : "Add Product"}</h2>
-              <button onClick={() => setShowForm(false)} className="p-2 hover:bg-surface rounded-full"><X className="w-5 h-5" /></button>
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 text-white shadow-2xl">
+            <div className="flex items-center justify-between mb-5 border-b border-neutral-800 pb-3">
+              <h2 className="font-heading text-xl font-bold text-white">{editing ? "Edit Product" : "Add Product"}</h2>
+              <button onClick={() => setShowForm(false)} className="p-2 hover:bg-neutral-800 text-neutral-400 hover:text-white rounded-full transition-colors"><X className="w-5 h-5" /></button>
             </div>
-
-            <div className="space-y-3">
-              <div className="grid grid-cols-2 gap-3">
+ 
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <label className="text-sm font-medium mb-1 block">Name *</label>
-                  <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Name *</label>
+                  <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Price *</label>
-                  <input type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Price *</label>
+                  <input type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">MRP</label>
-                  <input type="number" value={form.mrp} onChange={(e) => setForm({ ...form, mrp: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">MRP</label>
+                  <input type="number" value={form.mrp} onChange={(e) => setForm({ ...form, mrp: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Unit</label>
-                  <input value={form.unit} onChange={(e) => setForm({ ...form, unit: e.target.value })} placeholder="500g, 1L, pack…" className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Unit</label>
+                  <input value={form.unit} onChange={(e) => setForm({ ...form, unit: e.target.value })} placeholder="500g, 1L, pack…" className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Stock</label>
-                  <input type="number" value={form.stock_qty} onChange={(e) => setForm({ ...form, stock_qty: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Stock</label>
+                  <input type="number" value={form.stock_qty} onChange={(e) => setForm({ ...form, stock_qty: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary placeholder-neutral-500" />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-medium mb-1 block">Category *</label>
-                  <select value={form.category_id} onChange={(e) => setForm({ ...form, category_id: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary">
-                    <option value="">Select category…</option>
-                    {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Category *</label>
+                  <select value={form.category_id} onChange={(e) => setForm({ ...form, category_id: e.target.value })} className="w-full h-10 px-3 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary">
+                    <option value="" className="bg-neutral-900 text-neutral-400">Select category…</option>
+                    {categories.map((c) => <option key={c.id} value={c.id} className="bg-neutral-900 text-white">{c.name}</option>)}
                   </select>
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-medium mb-1 block">Description</label>
-                  <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={2} className="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-primary resize-none" />
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Description</label>
+                  <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={2} className="w-full px-3 py-2 rounded-lg border border-neutral-800 bg-neutral-950 text-white text-sm focus:outline-none focus:border-primary resize-none placeholder-neutral-500" />
                 </div>
                 <div className="col-span-2">
-                  <label className="text-sm font-medium mb-1 block">Image</label>
-                  <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)} className="text-sm w-full" />
-                  {form.image_url && !imageFile && <p className="text-xs text-text-secondary mt-1">Current: image set</p>}
+                  <label className="text-sm font-medium mb-1.5 block text-neutral-300">Image</label>
+                  <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)} className="text-sm w-full text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-neutral-800 file:text-white hover:file:bg-neutral-700" />
+                  {form.image_url && !imageFile && <p className="text-xs text-neutral-400 mt-1">Current: image set</p>}
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" id="available" checked={form.is_available} onChange={(e) => setForm({ ...form, is_available: e.target.checked })} className="accent-primary" />
-                  <label htmlFor="available" className="text-sm">Available</label>
+                  <input type="checkbox" id="available" checked={form.is_available} onChange={(e) => setForm({ ...form, is_available: e.target.checked })} className="accent-primary w-4 h-4 rounded border-neutral-800 bg-neutral-950" />
+                  <label htmlFor="available" className="text-sm text-neutral-300">Available</label>
                 </div>
                 <div className="flex items-center gap-2">
-                  <input type="checkbox" id="featured" checked={form.is_featured} onChange={(e) => setForm({ ...form, is_featured: e.target.checked })} className="accent-primary" />
-                  <label htmlFor="featured" className="text-sm">Featured</label>
+                  <input type="checkbox" id="featured" checked={form.is_featured} onChange={(e) => setForm({ ...form, is_featured: e.target.checked })} className="accent-primary w-4 h-4 rounded border-neutral-800 bg-neutral-950" />
+                  <label htmlFor="featured" className="text-sm text-neutral-300">Featured</label>
                 </div>
               </div>
-
+ 
               <Button className="w-full" onClick={save} isLoading={saving}>
                 {editing ? "Save Changes" : "Create Product"}
               </Button>
