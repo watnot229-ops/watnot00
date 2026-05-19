@@ -10,6 +10,24 @@ import { Plus, Pencil, Trash2, X } from "lucide-react";
 
 const emptyProduct = { name: "", description: "", price: "", mrp: "", unit: "", stock_qty: "100", category_id: "", is_available: true, is_featured: false, image_url: "" };
 
+const DEFAULT_CATEGORIES = [
+  { id: "cat-fruits-veggies", name: "Fruits & Veggies", slug: "fruits-veggies" },
+  { id: "cat-dairy-eggs", name: "Dairy & Eggs", slug: "dairy-eggs" },
+  { id: "cat-meat-seafood", name: "Meat & Seafood", slug: "meat-seafood" },
+  { id: "cat-snacks", name: "Snacks", slug: "snacks" },
+  { id: "cat-beverages", name: "Beverages", slug: "beverages" },
+  { id: "cat-bakery", name: "Bakery", slug: "bakery" },
+  { id: "cat-staples-grains", name: "Staples & Grains", slug: "staples-grains" },
+  { id: "cat-breakfast", name: "Breakfast", slug: "breakfast" },
+  { id: "cat-frozen-foods", name: "Frozen Foods", slug: "frozen-foods" },
+  { id: "cat-cleaning", name: "Cleaning", slug: "cleaning" },
+  { id: "cat-personal-care", name: "Personal Care", slug: "personal-care" },
+  { id: "cat-pet-care", name: "Pet Care", slug: "pet-care" },
+  { id: "cat-baby-care", name: "Baby Care", slug: "baby-care" },
+  { id: "cat-condiments", name: "Condiments & Sauces", slug: "condiments" },
+  { id: "cat-instant-food", name: "Instant Food", slug: "instant-food" }
+];
+
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -32,7 +50,7 @@ export default function AdminProductsPage() {
 
     const dbProds = prods || [];
     const localProds = JSON.parse(localStorage.getItem("mock-products") || "[]");
-    const catsData = (cats || []) as any[];
+    const catsData = (cats && cats.length > 0 ? cats : DEFAULT_CATEGORIES) as any[];
 
     const formattedLocal = localProds.map((lp: any) => ({
       ...lp,

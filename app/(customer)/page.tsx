@@ -14,6 +14,24 @@ const SUPER_CATEGORIES = [
   { id: "meat", name: "Meat", slugs: ["meat-seafood"] }
 ];
 
+const DEFAULT_CATEGORIES = [
+  { id: "cat-fruits-veggies", name: "Fruits & Veggies", slug: "fruits-veggies" },
+  { id: "cat-dairy-eggs", name: "Dairy & Eggs", slug: "dairy-eggs" },
+  { id: "cat-meat-seafood", name: "Meat & Seafood", slug: "meat-seafood" },
+  { id: "cat-snacks", name: "Snacks", slug: "snacks" },
+  { id: "cat-beverages", name: "Beverages", slug: "beverages" },
+  { id: "cat-bakery", name: "Bakery", slug: "bakery" },
+  { id: "cat-staples-grains", name: "Staples & Grains", slug: "staples-grains" },
+  { id: "cat-breakfast", name: "Breakfast", slug: "breakfast" },
+  { id: "cat-frozen-foods", name: "Frozen Foods", slug: "frozen-foods" },
+  { id: "cat-cleaning", name: "Cleaning", slug: "cleaning" },
+  { id: "cat-personal-care", name: "Personal Care", slug: "personal-care" },
+  { id: "cat-pet-care", name: "Pet Care", slug: "pet-care" },
+  { id: "cat-baby-care", name: "Baby Care", slug: "baby-care" },
+  { id: "cat-condiments", name: "Condiments & Sauces", slug: "condiments" },
+  { id: "cat-instant-food", name: "Instant Food", slug: "instant-food" }
+];
+
 export default function HomePage() {
   const [categories, setCategories] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
@@ -30,7 +48,7 @@ export default function HomePage() {
         supabase.from("products").select("*").eq("is_featured", true).limit(8),
       ]);
       
-      const catsData = cats || [];
+      const catsData = cats && cats.length > 0 ? cats : DEFAULT_CATEGORIES;
       const dbFeatured = featuredItems || [];
       
       let localFeatured: any[] = [];
