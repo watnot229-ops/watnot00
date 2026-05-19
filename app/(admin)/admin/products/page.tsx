@@ -166,9 +166,9 @@ export default function AdminProductsPage() {
 
       {/* Product grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
-        {loading ? Array.from({ length: 10 }).map((_, i) => <div key={i} className="bg-white rounded-xl h-64 animate-pulse" />) : products.map((p) => (
-          <div key={p.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-            <div className="relative aspect-square bg-surface">
+        {loading ? Array.from({ length: 10 }).map((_, i) => <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-xl h-64 animate-pulse" />) : products.map((p) => (
+          <div key={p.id} className="bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div className="relative aspect-square bg-neutral-950 border-b border-neutral-800">
               {p.image_url ? (
                 <Image
                   src={p.image_url}
@@ -183,14 +183,14 @@ export default function AdminProductsPage() {
               {!p.is_available && <div className="absolute inset-0 bg-black/40 flex items-center justify-center"><span className="text-white text-xs font-bold">UNAVAILABLE</span></div>}
             </div>
             <div className="p-3">
-              <p className="font-medium text-sm line-clamp-1">{p.name}</p>
-              <p className="text-xs text-text-secondary">{p.categories?.name} · {p.unit}</p>
-              <p className="font-bold text-sm mt-1">{formatCurrency(p.price)}</p>
+              <p className="font-medium text-sm line-clamp-1 text-white">{p.name}</p>
+              <p className="text-xs text-neutral-400 mt-0.5">{p.categories?.name} · {p.unit}</p>
+              <p className="font-bold text-sm mt-1 text-emerald-400">{formatCurrency(p.price)}</p>
               <div className="flex gap-1 mt-2">
-                <button onClick={() => openEdit(p)} className="flex-1 flex items-center justify-center gap-1 py-1 text-xs border border-gray-200 rounded-lg hover:bg-surface transition-colors">
+                <button onClick={() => openEdit(p)} className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs border border-neutral-800 text-neutral-300 rounded-lg hover:bg-neutral-800 hover:text-white transition-colors">
                   <Pencil className="w-3 h-3" /> Edit
                 </button>
-                <button onClick={() => deleteProduct(p.id)} className="flex items-center justify-center p-1 text-danger border border-danger/20 rounded-lg hover:bg-danger/5 transition-colors">
+                <button onClick={() => deleteProduct(p.id)} className="flex items-center justify-center p-1.5 text-red-400 border border-red-500/20 rounded-lg hover:bg-red-500/10 transition-colors">
                   <Trash2 className="w-3 h-3" />
                 </button>
               </div>

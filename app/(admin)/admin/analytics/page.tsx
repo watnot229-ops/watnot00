@@ -65,7 +65,7 @@ export default function AdminAnalyticsPage() {
   if (loading) {
     return (
       <div className="space-y-4">
-        {Array.from({ length: 3 }).map((_, i) => <div key={i} className="bg-white rounded-xl h-64 animate-pulse" />)}
+        {Array.from({ length: 3 }).map((_, i) => <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-xl h-64 animate-pulse" />)}
       </div>
     );
   }
@@ -75,28 +75,28 @@ export default function AdminAnalyticsPage() {
       <h1 className="font-heading text-2xl font-bold text-text-primary">Analytics</h1>
 
       {/* Orders per day */}
-      <div className="bg-white rounded-xl border border-gray-100 p-6">
-        <h2 className="font-semibold text-text-primary mb-4">Orders per Day (Last 30 Days)</h2>
+      <div className="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
+        <h2 className="font-semibold text-white mb-4">Orders per Day (Last 30 Days)</h2>
         <ResponsiveContainer width="100%" height={240}>
           <LineChart data={ordersData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis dataKey="date" tick={{ fontSize: 11 }} interval={6} />
-            <YAxis tick={{ fontSize: 11 }} />
-            <Tooltip />
+            <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
+            <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#a3a3a3' }} interval={6} />
+            <YAxis tick={{ fontSize: 11, fill: '#a3a3a3' }} />
+            <Tooltip contentStyle={{ backgroundColor: '#0a0a0a', borderColor: '#262626', borderRadius: '8px', color: '#fff' }} />
             <Line type="monotone" dataKey="orders" stroke="#10B981" strokeWidth={2} dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
       {/* Revenue per day */}
-      <div className="bg-white rounded-xl border border-gray-100 p-6">
-        <h2 className="font-semibold text-text-primary mb-4">Revenue per Day</h2>
+      <div className="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
+        <h2 className="font-semibold text-white mb-4">Revenue per Day</h2>
         <ResponsiveContainer width="100%" height={240}>
           <BarChart data={revenueData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis dataKey="date" tick={{ fontSize: 11 }} interval={6} />
-            <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => `₹${v}`} />
-            <Tooltip formatter={(v: any) => formatCurrency(v)} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#262626" />
+            <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#a3a3a3' }} interval={6} />
+            <YAxis tick={{ fontSize: 11, fill: '#a3a3a3' }} tickFormatter={(v) => `₹${v}`} />
+            <Tooltip contentStyle={{ backgroundColor: '#0a0a0a', borderColor: '#262626', borderRadius: '8px', color: '#fff' }} formatter={(v: any) => formatCurrency(v)} />
             <Bar dataKey="revenue" fill="#10B981" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
@@ -104,15 +104,15 @@ export default function AdminAnalyticsPage() {
 
       {/* Category pie */}
       {categoryData.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-100 p-6">
-          <h2 className="font-semibold text-text-primary mb-4">Top Products by Quantity</h2>
+        <div className="bg-neutral-900 rounded-xl border border-neutral-800 p-6">
+          <h2 className="font-semibold text-white mb-4">Top Products by Quantity</h2>
           <ResponsiveContainer width="100%" height={280}>
             <PieChart>
-              <Pie data={categoryData} cx="50%" cy="50%" outerRadius={100} dataKey="value" label={(props: any) => `${props.name ?? ""} ${((props.percent ?? 0) * 100).toFixed(0)}%`} labelLine={false}>
+              <Pie data={categoryData} cx="50%" cy="50%" outerRadius={100} dataKey="value" label={(props: any) => `${props.name ?? ""} ${((props.percent ?? 0) * 100).toFixed(0)}%`} labelLine={false} style={{ outline: 'none' }}>
                 {categoryData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
               </Pie>
-              <Tooltip />
-              <Legend />
+              <Tooltip contentStyle={{ backgroundColor: '#0a0a0a', borderColor: '#262626', borderRadius: '8px', color: '#fff' }} />
+              <Legend wrapperStyle={{ color: '#fff' }} />
             </PieChart>
           </ResponsiveContainer>
         </div>

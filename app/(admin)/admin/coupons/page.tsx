@@ -61,33 +61,33 @@ export default function AdminCouponsPage() {
         </Button>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+      <div className="bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 bg-surface">
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Code</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Discount</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Min Order</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Usage</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Expires</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Status</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Action</th>
+              <tr className="border-b border-neutral-800 bg-neutral-950">
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Code</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Discount</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Min Order</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Usage</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Expires</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Status</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Action</th>
               </tr>
             </thead>
             <tbody>
               {loading ? Array.from({ length: 4 }).map((_, i) => (
-                <tr key={i}><td colSpan={7} className="px-5 py-4"><div className="h-5 bg-surface rounded animate-pulse" /></td></tr>
+                <tr key={i}><td colSpan={7} className="px-5 py-4"><div className="h-5 bg-neutral-950 rounded animate-pulse" /></td></tr>
               )) : coupons.map((c) => (
-                <tr key={c.id} className="border-b border-gray-50 hover:bg-surface/50 transition-colors">
-                  <td className="px-5 py-4 font-bold text-primary">{c.code}</td>
-                  <td className="px-5 py-4">{c.discount_type === "flat" ? formatCurrency(c.discount_value) : `${c.discount_value}%`} off</td>
+                <tr key={c.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 text-neutral-200 transition-colors">
+                  <td className="px-5 py-4 font-bold text-emerald-400">{c.code}</td>
+                  <td className="px-5 py-4 font-medium text-white">{c.discount_type === "flat" ? formatCurrency(c.discount_value) : `${c.discount_value}%`} off</td>
                   <td className="px-5 py-4">{formatCurrency(c.min_order_value || 0)}</td>
-                  <td className="px-5 py-4 text-text-secondary">{c.used_count || 0} / {c.max_uses}</td>
-                  <td className="px-5 py-4 text-text-secondary">{c.expires_at ? format(new Date(c.expires_at), "d MMM yy") : "No expiry"}</td>
+                  <td className="px-5 py-4 text-neutral-400">{c.used_count || 0} / {c.max_uses}</td>
+                  <td className="px-5 py-4 text-neutral-400">{c.expires_at ? format(new Date(c.expires_at), "d MMM yy") : "No expiry"}</td>
                   <td className="px-5 py-4"><Badge variant={c.is_active ? "success" : "outline"}>{c.is_active ? "Active" : "Inactive"}</Badge></td>
                   <td className="px-5 py-4">
-                    <button onClick={() => toggleActive(c.id, c.is_active)} className={`text-xs px-3 py-1.5 rounded-lg border font-medium transition-colors ${c.is_active ? "border-danger/20 text-danger hover:bg-danger/5" : "border-success/20 text-success hover:bg-success/5"}`}>
+                    <button onClick={() => toggleActive(c.id, c.is_active)} className={`text-xs px-3 py-1.5 rounded-lg border font-medium transition-colors ${c.is_active ? "border-red-500/20 text-red-400 hover:bg-red-500/10" : "border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/10"}`}>
                       {c.is_active ? "Deactivate" : "Activate"}
                     </button>
                   </td>

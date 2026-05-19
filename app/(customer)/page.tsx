@@ -29,8 +29,18 @@ export default function HomePage() {
         supabase.from("categories").select("*").order("display_order"),
         supabase.from("products").select("*").eq("is_featured", true).limit(8),
       ]);
-      setCategories(cats || []);
-      setFeatured(featuredItems || []);
+      
+      const catsData = cats || [];
+      const dbFeatured = featuredItems || [];
+      
+      let localFeatured: any[] = [];
+      if (typeof window !== "undefined") {
+        const localProds = JSON.parse(localStorage.getItem("mock-products") || "[]");
+        localFeatured = localProds.filter((lp: any) => lp.is_featured);
+      }
+      
+      setCategories(catsData);
+      setFeatured([...localFeatured, ...dbFeatured].slice(0, 8));
       setLoading(false);
     }
     load();
@@ -40,13 +50,14 @@ export default function HomePage() {
     async function loadProducts() {
       let query = supabase.from("products").select("*").eq("is_available", true);
       
+      let matchedCatIds: string[] = [];
       if (selectedCategory !== "all") {
         const activeSuper = SUPER_CATEGORIES.find(sc => sc.id === selectedCategory);
         if (activeSuper) {
           const matchedCats = categories.filter(c => activeSuper.slugs.includes(c.slug));
-          const catIds = matchedCats.map(c => c.id);
-          if (catIds.length > 0) {
-            query = query.in("category_id", catIds);
+          matchedCatIds = matchedCats.map(c => c.id);
+          if (matchedCatIds.length > 0) {
+            query = query.in("category_id", matchedCatIds);
           } else {
             setProducts([]);
             return;
@@ -55,7 +66,21 @@ export default function HomePage() {
       }
       
       const { data } = await query.order("created_at", { ascending: false }).limit(40);
-      setProducts(data || []);
+      const dbProds = data || [];
+      
+      let localProds: any[] = [];
+      if (typeof window !== "undefined") {
+        const rawLocal = JSON.parse(localStorage.getItem("mock-products") || "[]");
+        localProds = rawLocal.filter((lp: any) => {
+          if (!lp.is_available) return false;
+          if (selectedCategory !== "all" && matchedCatIds.length > 0) {
+            return matchedCatIds.includes(lp.category_id);
+          }
+          return true;
+        });
+      }
+      
+      setProducts([...localProds, ...dbProds]);
     }
     if (categories.length > 0 || selectedCategory === "all") {
       loadProducts();

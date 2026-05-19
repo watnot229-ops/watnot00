@@ -32,47 +32,47 @@ export default function AdminDeliveryAgentsPage() {
     <div>
       <h1 className="font-heading text-2xl font-bold text-text-primary mb-6">Delivery Agents</h1>
 
-      <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+      <div className="bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 bg-surface">
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Agent</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Status</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Current Order</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Deliveries</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Rating</th>
-                <th className="text-left px-5 py-3 font-semibold text-text-secondary">Actions</th>
+              <tr className="border-b border-neutral-800 bg-neutral-950">
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Agent</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Status</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Current Order</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Deliveries</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Rating</th>
+                <th className="text-left px-5 py-3 font-semibold text-neutral-400">Actions</th>
               </tr>
             </thead>
             <tbody>
               {loading ? Array.from({ length: 5 }).map((_, i) => (
-                <tr key={i}><td colSpan={6} className="px-5 py-4"><div className="h-5 bg-surface rounded animate-pulse" /></td></tr>
+                <tr key={i}><td colSpan={6} className="px-5 py-4"><div className="h-5 bg-neutral-950 rounded animate-pulse" /></td></tr>
               )) : agents.map((agent) => (
-                <tr key={agent.id} className="border-b border-gray-50 hover:bg-surface/50 transition-colors">
+                <tr key={agent.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 text-neutral-200 transition-colors">
                   <td className="px-5 py-4">
-                    <p className="font-medium">{agent.users?.full_name || "—"}</p>
-                    <p className="text-xs text-text-secondary">{agent.users?.email || agent.users?.phone}</p>
+                    <p className="font-medium text-white">{agent.users?.full_name || "—"}</p>
+                    <p className="text-xs text-neutral-400">{agent.users?.email || agent.users?.phone}</p>
                   </td>
                   <td className="px-5 py-4">
                     <Badge variant={agent.is_online ? "success" : "outline"}>
                       {agent.is_online ? "Online" : "Offline"}
                     </Badge>
                   </td>
-                  <td className="px-5 py-4 text-text-secondary">
-                    {agent.current_order_id ? <span className="text-warning font-medium">Active order</span> : "—"}
+                  <td className="px-5 py-4 text-neutral-400">
+                    {agent.current_order_id ? <span className="text-amber-400 font-medium">Active order</span> : "—"}
                   </td>
-                  <td className="px-5 py-4 font-medium">{agent.total_deliveries}</td>
+                  <td className="px-5 py-4 font-medium text-white">{agent.total_deliveries}</td>
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-1">
-                      <Star className="w-3.5 h-3.5 text-warning fill-warning" />
-                      <span>{agent.rating?.toFixed(1)}</span>
+                      <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                      <span className="text-white">{agent.rating?.toFixed(1)}</span>
                     </div>
                   </td>
                   <td className="px-5 py-4">
                     <button
                       onClick={() => toggleOnline(agent.id, agent.is_online)}
-                      className={`text-xs px-3 py-1.5 rounded-lg border font-medium transition-colors ${agent.is_online ? "border-danger/20 text-danger hover:bg-danger/5" : "border-success/20 text-success hover:bg-success/5"}`}
+                      className={`text-xs px-3 py-1.5 rounded-lg border font-medium transition-colors ${agent.is_online ? "border-red-500/20 text-red-400 hover:bg-red-500/10" : "border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/10"}`}
                     >
                       {agent.is_online ? "Set Offline" : "Set Online"}
                     </button>

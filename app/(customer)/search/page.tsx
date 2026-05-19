@@ -36,7 +36,20 @@ export default function SearchPage() {
       }
 
       const { data } = await q.limit(50);
-      setResults(data || []);
+      const dbResults = data || [];
+
+      // Local mock products
+      let localProds: any[] = [];
+      if (typeof window !== "undefined") {
+        const rawLocal = JSON.parse(localStorage.getItem("mock-products") || "[]");
+        localProds = rawLocal.filter((lp: any) => {
+          if (!lp.is_available) return false;
+          if (!debouncedQuery) return true;
+          return lp.name.toLowerCase().includes(debouncedQuery.toLowerCase());
+        });
+      }
+
+      setResults([...localProds, ...dbResults]);
       setLoading(false);
     }
     search();

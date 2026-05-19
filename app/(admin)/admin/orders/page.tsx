@@ -119,46 +119,46 @@ export default function AdminOrdersPage() {
       {/* Filters */}
       <div className="flex gap-2 flex-wrap mb-4">
         {["all", ...STATUSES].map((s) => (
-          <button key={s} onClick={() => setFilter(s)} className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${filter === s ? "bg-primary text-white border-primary" : "bg-white text-text-secondary border-gray-200 hover:border-primary"}`}>
+          <button key={s} onClick={() => setFilter(s)} className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${filter === s ? "bg-primary text-white border-primary" : "bg-neutral-900 text-neutral-300 border-neutral-800 hover:border-primary hover:text-white"}`}>
             {s === "all" ? "All" : s.replace("_", " ")}
           </button>
         ))}
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+      <div className="bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 bg-surface">
-                <th className="text-left px-4 py-3 font-semibold text-text-secondary">Order</th>
-                <th className="text-left px-4 py-3 font-semibold text-text-secondary">Customer</th>
-                <th className="text-left px-4 py-3 font-semibold text-text-secondary">Items</th>
-                <th className="text-left px-4 py-3 font-semibold text-text-secondary">Total</th>
-                <th className="text-left px-4 py-3 font-semibold text-text-secondary">Status</th>
-                <th className="text-left px-4 py-3 font-semibold text-text-secondary">Actions</th>
+              <tr className="border-b border-neutral-800 bg-neutral-950">
+                <th className="text-left px-4 py-3 font-semibold text-neutral-400">Order</th>
+                <th className="text-left px-4 py-3 font-semibold text-neutral-400">Customer</th>
+                <th className="text-left px-4 py-3 font-semibold text-neutral-400">Items</th>
+                <th className="text-left px-4 py-3 font-semibold text-neutral-400">Total</th>
+                <th className="text-left px-4 py-3 font-semibold text-neutral-400">Status</th>
+                <th className="text-left px-4 py-3 font-semibold text-neutral-400">Actions</th>
               </tr>
             </thead>
             <tbody>
               {loading && Array.from({ length: 5 }).map((_, i) => (
-                <tr key={i}><td colSpan={6} className="px-4 py-4"><div className="h-6 bg-surface rounded animate-pulse" /></td></tr>
+                <tr key={i}><td colSpan={6} className="px-4 py-4"><div className="h-6 bg-neutral-950 rounded animate-pulse" /></td></tr>
               ))}
               {filtered.map((order) => {
                 const s = statusConfig[order.status] || { variant: "outline" };
                 return (
-                  <tr key={order.id} className="border-b border-gray-50 hover:bg-surface/50 transition-colors cursor-pointer" onClick={() => setSelected(order)}>
-                    <td className="px-4 py-4 font-medium text-primary">{order.order_number}</td>
-                    <td className="px-4 py-4 text-text-secondary">{order.users?.full_name || "—"}</td>
-                    <td className="px-4 py-4">{Array.isArray(order.items) ? order.items.length : 0}</td>
-                    <td className="px-4 py-4 font-medium">{formatCurrency(order.total || 0)}</td>
+                  <tr key={order.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 text-neutral-200 transition-colors cursor-pointer" onClick={() => setSelected(order)}>
+                    <td className="px-4 py-4 font-bold text-emerald-400">{order.order_number}</td>
+                    <td className="px-4 py-4 text-neutral-300">{order.users?.full_name || "—"}</td>
+                    <td className="px-4 py-4 text-neutral-300">{Array.isArray(order.items) ? order.items.length : 0}</td>
+                    <td className="px-4 py-4 font-semibold text-white">{formatCurrency(order.total || 0)}</td>
                     <td className="px-4 py-4"><Badge variant={s.variant}>{order.status.replace("_", " ")}</Badge></td>
                     <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
                       <select
                         value={order.status}
                         onChange={(e) => updateStatus(order.id, e.target.value)}
-                        className="text-xs border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:border-primary"
+                        className="text-xs bg-neutral-950 border border-neutral-800 text-white rounded-lg px-2 py-1.5 focus:outline-none focus:border-primary"
                       >
-                        {STATUSES.map((s) => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
+                        {STATUSES.map((s) => <option key={s} value={s} className="bg-neutral-900 text-white">{s.replace("_", " ")}</option>)}
                       </select>
                     </td>
                   </tr>
