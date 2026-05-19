@@ -9,9 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: "#10B981",
+          hover: "#059669",
+        },
+        background: "#000000",
+        surface: "#0A0A0A",
+        text: {
+          primary: "#FFFFFF",
+          secondary: "#A1A1AA",
+        },
+        success: "#10B981",
+        warning: "#F59E0B",
+        danger: "#EF4444",
       },
+      fontFamily: {
+        heading: ["Clash Display", "sans-serif"],
+        body: ["Satoshi", "sans-serif"],
+      },
+      borderRadius: {
+        'xl': '16px',
+        'lg': '12px',
+        'md': '8px',
+      }
     },
   },
   plugins: [],
